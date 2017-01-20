@@ -1,0 +1,193 @@
+#!/bin/bash
+#Note you can edit on this script and develp it
+#But please dont remove my name from them
+#The script write in bash language
+a=$1
+server=$2 
+b=$3
+c=$4
+#Color
+Black='\e[0;30m'        # Black
+Red='\e[0;31m'          # Red
+Green='\e[0;32m'        # Green
+Yellow='\e[0;33m'       # Yellow
+Blue='\e[0;34m'         # Blue
+Purple='\e[0;35m'       # Purple
+Cyan='\e[0;36m'         # Cyan
+White='\e[0;37m'        # White
+
+# Bold
+BBlack='\e[1;30m'       # Black
+BRed='\e[1;31m'         # Red
+BGreen='\e[1;32m'       # Green
+BYellow='\e[1;33m'      # Yellow
+BBlue='\e[1;34m'        # Blue
+BPurple='\e[1;35m'      # Purple
+BCyan='\e[1;36m'        # Cyan
+BWhite='\e[1;37m'       # White
+if [ $# -eq 0 ] 
+	then
+echo -e $BRed "./netscan.sh: Options Not Found Type ./netscan.sh -h to show Options"
+
+elif [ $a == -h ]
+then
+echo -e $BBlue "------------------------------------------------------"
+echo -e $BBlue "|                      $(echo -e $Red"NETSCAN")                       $(echo -e $BBlue"|")"
+echo -e $BBlue "|                                                    |"
+echo -e $BBlue "|      It is a tool that collects information        |"
+echo -e $BBlue "|     about the Network and extract mistakes that    |"
+echo -e $BBlue "|                                                    |"
+echo -e $BBlue "|             $(echo -e $BYellow"coded by Ahmad Nourallah")               $(echo -e $BBlue"|")"
+echo -e $BBlue "|                                                    |"
+echo -e $BBlue "|   I apologize for any error found in the script    |"
+echo -e $BBlue "|                   Verison 1.0                      |"
+echo -e $BBlue "------------------------------------------------------"
+	echo
+	echo -e $BYellow "Usage: ./netscan.sh [options] "
+	echo
+
+echo -e $Green "Options:"
+echo
+echo -e $BWhite"    -p             use to search any port open in device"
+echo -e $BWhite"                   Note: the port scanner not work on internal device"
+echo -e $BWhite"    -k             use to kill internet on device on your network"
+echo -e $BWhite"    -sp            use to search on selected open port in device"    
+echo -e $BWhite"    -nd            use to make network discover for your network"
+echo -e $BWhite"    -ns            use to see your network status"
+echo -e $BWhite"    -dd            use to make dos attack on website use ping."
+echo 
+echo -e $Green "helps:"
+echo
+echo -e $BWhite"    -h             use to show this page"
+echo -e $BWhite"    -v             use to show script verison"
+echo -e $BWhite"    -to            use to see tools options"
+echo 
+ elif [ $a == -v ]
+then
+	echo "Verison 1.0 "
+	echo "           All Rights Reserved to Ahmad Nourallah"
+elif [ $a == -p ]
+	then
+
+echo "Please wait will scaning open port...."
+host=$server
+for port in {1..150}; do 
+    (echo > /dev/tcp/$host/$port) &>/dev/null
+    [ $? -eq 0 ] && echo "- $port open"
+done
+elif [ $a == -nd ]  
+	then
+	echo "Please wait will make network discover...."
+network_discover()
+{
+
+  ping -c 1 $1 &> /dev/null 
+  [ $? -eq 0 ] && echo The Host: "($i)" Is Up.
+}
+
+for i in $server.{1..255} 
+do
+network_discover $i &
+done
+
+elif [ $a == -sp ]  
+	then
+	nc -v -z $server $b &>/dev/null 
+	opret1=$?
+if [ $opret1 = 0 ]
+then
+	
+	echo "PORT    STATUS"
+    echo $b  "      open"
+else
+	echo "PORT    STATUS"
+    echo $b  "  close"
+fi
+elif [ $a == -lp ]
+	then
+	nc -vlp $server
+elif [ $a == -k ]
+	then
+	read -p "Prees <Enter> to start attack atfer start attack use <ctrl+c> to stop attack"
+	./tools/arpspoof -i $server -t $b -r 
+elif [ $a == -ns ]
+	then 
+	netstat
+elif [ $a == -dd ]
+then
+echo
+echo -e $BYellow "Note: $(echo -e $BWhite"The attack started prees") $(echo -e $BRed"<ctrl+c>")$(echo -e $BWhite" to exit.")"
+ping -c 1000000 -I $server $b &> /dev/null
+elif [ $a == -to ]
+	then
+while true
+do
+echo "$(echo -e $BYellow"Note"): $(echo -e $White"Press <exit> to exit tools helper")"
+read -p "welcome in tools helper enter the tools name to see Usage [Example: (-p)]: " tools
+if [ $tools == -p ]
+	then
+	clear
+echo "Port scanner: "
+echo "Usage :"
+echo "       ./netscan.sh -p (Target IP)"
+echo "-------------------------------------------------------------"
+read -n1 -r -p "$(echo -e $BBlue "Press enter to continue...")" key
+clear
+elif [ "$tools" == -k ]
+	then
+	clear
+echo "Net Killer: "
+echo "Usage :"
+echo "       ./netscan.sh -k (Interface) (Target IP) (IP Router)"
+echo "-------------------------------------------------------------"
+read -n1 -r -p "$(echo -e $BBlue "Press enter to continue...")" key
+clear
+elif [ "$tools" == -sp ]
+	then
+	clear
+echo "Selected Port Scanner: "
+echo "Usage :"
+echo "       ./netscan.sh -sp (Target IP) (Port)"
+echo "-------------------------------------------------------------"
+read -n1 -r -p "$(echo -e $BBlue "Press enter to continue...")" key
+clear
+elif [ "$tools" == -nd ]
+	then
+	clear
+echo "Network Discover: "
+echo "Usage :"
+echo "     	./netscan.sh -nd (router ip with out last number [Example: (192.168.1)])"
+echo "-------------------------------------------------------------"
+read -n1 -r -p "$(echo -e $BBlue "Press enter to continue...")" key
+clear
+elif [ "$tools" == -ns ]
+	then
+	clear
+echo "Network Status: "
+echo "Usage :"
+echo "       ./netscan.sh -ns"
+echo "-------------------------------------------------------------"
+read -n1 -r -p "$(echo -e $BBlue "Press enter to continue...")" key
+clear
+elif [ "$tools" == "exit" ]
+	then
+	exit
+elif [ "$tools" == "-dd" ]
+then
+echo "Dos attack:"
+echo "           ./netscan.sh -dd (interface) (website.com)"
+echo "-------------------------------------------------------------"
+read -n1 -r -p "$(echo -e $BBlue "Press enter to continue...")" key
+else
+	clear
+	echo "Tools Not Found"
+	echo "-------------------------------------------------------------"
+read -n1 -r -p "$(echo -e $BBlue "Press enter to continue...")" key
+clear
+fi
+done
+
+else 
+	echo "./netscan.sh: Options Not Found Type ./netscan.sh -h to show Options"
+fi
+ 
