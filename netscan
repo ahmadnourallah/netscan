@@ -40,7 +40,7 @@ echo -e $BBlue "|                                                    |"
 echo -e $BBlue "|             $(echo -e $BYellow"coded by Ahmad Nourallah")               $(echo -e $BBlue"|")"
 echo -e $BBlue "|                                                    |"
 echo -e $BBlue "|   I apologize for any error found in the script    |"
-echo -e $BBlue "|                   Verison 1.0                      |"
+echo -e $BBlue "|                   Verison 1.1                      |"
 echo -e $BBlue "------------------------------------------------------"
 	echo
 	echo -e $BYellow "Usage: ./netscan.sh [options] "
@@ -64,7 +64,7 @@ echo -e $BWhite"    -to            use to see tools options"
 echo 
  elif [ $a == -v ]
 then
-	echo "Verison 1.0 "
+	echo "Verison 1.1 "
 	echo "           All Rights Reserved to Ahmad Nourallah"
 elif [ $a == -p ]
 	then
